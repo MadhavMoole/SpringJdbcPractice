@@ -1,9 +1,9 @@
 package com.employee.dao;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+//import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.employee.api.Employee;
 
@@ -11,7 +11,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	// using the overloaded constructor of JdbcTemplate class to create an instance
 	// of JdbcTemplate with the DataSource Object
-	private JdbcTemplate jt = new JdbcTemplate(dataSource());
+	private JdbcTemplate jt;
+
+	//We are going to use this mutator/setter in our bean configuration to set the JdbcTemplate object
+	public void setJt(JdbcTemplate jt) {
+		this.jt = jt;
+	}
 
 	@Override
 	public void insert(Employee e) {
@@ -27,10 +32,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	// DriverManagerDataSource Implementation), instead use Spring beans to ensure
 	// that Spring is the one creating the Object of this Implementation and not the
 	// programmer
-	public DataSource dataSource() {
-		String url = "jdbc:mysql://127.0.0.1:3306/employee";
-		String username = "root";
-		String password = "madh";
-		return new DriverManagerDataSource(url, username, password);
-	}
+	/* 	
+	 * 	public DataSource dataSource() {
+			String url = "jdbc:mysql://127.0.0.1:3306/employee";
+			String username = "root";
+			String password = "madh";
+			return new DriverManagerDataSource(url, username, password);
+		}
+	*/
 }
