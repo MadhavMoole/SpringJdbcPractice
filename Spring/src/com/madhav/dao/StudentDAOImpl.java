@@ -9,6 +9,7 @@ import com.madhav.api.Student;
 @Repository("Studentdao")   
 public class StudentDAOImpl implements StudentDAO {
 	
+	//we are using annotations in this scenario essentially asking Spring to create an Object of JdbcTemplate for us.
 	@Autowired
 	private JdbcTemplate jt;
 	
