@@ -26,7 +26,8 @@ public class Test {
 		// we will create a better version of this trash implementation
 		//EmployeeDAO ee = new EmployeeDAOImpl();
 		
-		//Here we are asking 
+		//Here we are asking ClassPathApplicationContext whether there is a bean
+		//available with the name "EmployeeDAO"
 		EmployeeDAO ee = (EmployeeDAOImpl)ctx.getBean("EmployeeDAO");
 		ee.insert(e);
 	}
