@@ -11,6 +11,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	// using the overloaded constructor of JdbcTemplate class to create an instance
 	// of JdbcTemplate with the DataSource Object
+	// private JdbcTemplate jt =  new JdbcTemplate(dataSource());
 	private JdbcTemplate jt;
 
 	//We are going to use this mutator/setter in our bean configuration to set the JdbcTemplate object
