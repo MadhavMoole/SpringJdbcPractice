@@ -18,21 +18,28 @@ public class Test {
 		ctx = new ClassPathXmlApplicationContext("beans.xml");
 		System.out.println("Application Context Loaded!");
 
-		/* Student t = new Student();
+		Student t = new Student();
 		t.setRollno(1);
 		t.setAddress("Goregaon");
 		t.setName("Test1");
 		System.out.println(t);
-		*/
+	   
 
 		// Creating the object
 		StudentDAO ss = (StudentDAOImpl) ctx.getBean("Studentdao");
+		/* 
 		if(ss.deleteRecordByRollNo(0)) {
 			System.out.println("Data Deleted!");
 		} else {
 			System.err.println("Error!");
 		}
-		
+		*/
+		ss.insert(t);
+		if(ss.deleteRecordByStudentNameOrStudentAddress(null, "Goregaon") == 1) {
+			System.out.println("DONE!");
+		} else {
+			System.out.println("YOU SUCK!");
+		}
 		
 	}
 

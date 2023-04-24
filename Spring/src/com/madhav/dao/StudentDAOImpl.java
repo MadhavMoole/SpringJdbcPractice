@@ -9,7 +9,6 @@ import com.madhav.api.Student;
 @Repository("Studentdao")   
 public class StudentDAOImpl implements StudentDAO {
 	
-	//we are using annotations in this scenario essentially asking Spring to create an Object of JdbcTemplate for us.
 	@Autowired
 	private JdbcTemplate jt;
 	
@@ -31,6 +30,15 @@ public class StudentDAOImpl implements StudentDAO {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM STUDENT WHERE ROLL_NO = ?";
 		return jt.update(sql, rollno) == 1;
+	}
+
+	@Override
+	public int deleteRecordByStudentNameOrStudentAddress(String name, String address) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM STUDENT WHERE STUDENT_NAME = ? OR STUDENT_ADDR = ?";
+		Object[] arg = {name, address};
+		int upd = jt.update(sql , arg);
+		return upd;
 	}
 	
 }

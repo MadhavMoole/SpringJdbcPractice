@@ -7,6 +7,12 @@
 	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/beans/spring-jdbc.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+	<!-- We need to check whether there exists a component/Bean/Repository definition 
+		given in the base package "com.employee", we need this so that spring identifies 
+		that there exists a Repository in that package and any future definitions 
+		we might give in the future to maintain modularity -->
+	<context:component-scan
+		base-package="com.employee.dao"></context:component-scan>
 	<!-- Creating a Bean for DriverManagerDataSource -->
 	<bean id="DataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -18,14 +24,15 @@
 
 	<!-- Bean for JdbcTemplate using the already initialized bean for DriverManagerDataSource 
 		Implementation of DataSource -->
-	<bean id="jtObj" class="org.springframework.jdbc.core.JdbcTemplate">
+	<bean id="jtObj"
+		class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="DataSource" />
 	</bean>
 
 	<!-- Here we are going to use the property tag to set the JdbcTemplate of 
 		the EmployeeDAOImpl Implementation class with reference to the JdbcTemplate 
 		Bean -->
-	<bean id="EmployeeDAO" class="com.employee.dao.EmployeeDAOImpl">
-		<property name="jt" ref = "jtObj"></property>
-	</bean>
+
+	<!-- <bean id="EmployeeDAO" class="com.employee.dao.EmployeeDAOImpl"> <property 
+		name="jt" ref = "jtObj"></property> </bean> -->
 </beans>
