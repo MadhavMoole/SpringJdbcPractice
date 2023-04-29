@@ -25,19 +25,11 @@ public class Test {
 		System.out.println(e);
 
 		// we will create a better version of this trash implementation
-<<<<<<< HEAD
 		// EmployeeDAO ee = new EmployeeDAOImpl();
 
 		// Here we are asking ClassPathApplicationContext whether there is a bean
 		// available with the name "EmployeeDAO"
 		EmployeeDAO ee = (EmployeeDAOImpl) ctx.getBean("EmployeeDAO");
-=======
-		//EmployeeDAO ee = new EmployeeDAOImpl();
-		
-		//Here we are asking ClassPathApplicationContext whether there is a bean
-		//available with the name "EmployeeDAO"
-		EmployeeDAO ee = (EmployeeDAOImpl)ctx.getBean("EmployeeDAO");
->>>>>>> f9df5584d580aa1c1efc1510eff2084430e31464
 		ee.insert(e);
 		if(ee.deleteByID(0)) {
 			System.out.println("SuccessFully Deleted!");

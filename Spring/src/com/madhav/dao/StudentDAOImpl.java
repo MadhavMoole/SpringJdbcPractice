@@ -1,15 +1,18 @@
 package com.madhav.dao;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.madhav.api.Student;
 
-@Repository("Studentdao")   
+//@Repository("Studentdao")   
 public class StudentDAOImpl implements StudentDAO {
 	
-	@Autowired
+	//@Autowired
 	private JdbcTemplate jt;
 	
 	public void setJt(JdbcTemplate jt) {
@@ -40,5 +43,27 @@ public class StudentDAOImpl implements StudentDAO {
 		int upd = jt.update(sql , arg);
 		return upd;
 	}
+
+	@Override
+	public void cleanup() {
+		// TODO Auto-generated method stub
+		String sql = "TRUNCATE TABLE STUDENT";
+		jt.execute(sql);
+		System.out.println("Table Cleaned up!");
+	}
+
+	@Override
+	public void insert(List<Student> ss) {
+		// TODO Auto-generated method stub
+		ArrayList<Object[]> sqlArgs = new ArrayList<>();
+		String sql = "INSERT INTO STUDENT VALUES (?, ?, ?)";
+		for(Student temp : ss) {
+			Object[] studentData = {temp.getRollno(), temp.getName(), temp.getAddress()};
+			sqlArgs.add(studentData);
+		}
+		jt.batchUpdate(sql, sqlArgs);
+		System.out.println("Batch Update Successful");
+	}
+	
 	
 }

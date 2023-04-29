@@ -1,5 +1,7 @@
 package com.employee.dao;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import javax.sql.DataSource;
@@ -15,17 +17,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	// using the overloaded constructor of JdbcTemplate class to create an instance
 	// of JdbcTemplate with the DataSource Object
-	// private JdbcTemplate jt =  new JdbcTemplate(dataSource());
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+	// private JdbcTemplate jt = new JdbcTemplate(dataSource());
 	@Autowired
-=======
->>>>>>> f9df5584d580aa1c1efc1510eff2084430e31464
->>>>>>> Stashed changes
 	private JdbcTemplate jt;
 
-	//We are going to use this mutator/setter in our bean configuration to set the JdbcTemplate object
+	// We are going to use this mutator/setter in our bean configuration to set the
+	// JdbcTemplate object
 	public void setJt(JdbcTemplate jt) {
 		this.jt = jt;
 	}
@@ -50,9 +47,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public int deleteByEmployeeNameOrDeptName(String e_name, String dept_name) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM EMPLOYEE WHERE e_NAME = ? OR dept_NAME = ?";
-		Object[] arg = {e_name, dept_name};
+		Object[] arg = { e_name, dept_name };
 		int upd = jt.update(sql, arg);
 		return upd;
+	}
+
+	@Override
+	public void cleanup() {
+		// TODO Auto-generated method stub
+		String sql = "TRUNCATE TABLE EMPLOYEE";
+		// Note : You can use update method as well but it will return 1 upon
+		// successfully performing the methods, usually execute is preferred for all
+		// these DDL statements
+		jt.execute(sql);
+		System.out.println("All records deleted!");
+	}
+
+	@Override
+	public void insert(List<Employee> e) {
+		// TODO Auto-generated method stub
+		ArrayList<Object[]> eList = new ArrayList<>();
+		for (Employee ee : e) {
+			Object[] employeeList = { ee.getE_id(), ee.getE_name(), ee.getDept_name() };
+			eList.add(employeeList);
+		}
+		String sql = "INSERT INTO EMPLOYEE VALUES (?, ?, ?)";
+		jt.batchUpdate(sql, eList);
+		System.out.println("Inserted Batch SuccessFully");
 	}
 
 	// This is a very stupid way of creating DataSource implementation, as you are
@@ -60,12 +81,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	// DriverManagerDataSource Implementation), instead use Spring beans to ensure
 	// that Spring is the one creating the Object of this Implementation and not the
 	// programmer
-	/* 	
-	 * 	public DataSource dataSource() {
-			String url = "jdbc:mysql://127.0.0.1:3306/employee";
-			String username = "root";
-			String password = "madh";
-			return new DriverManagerDataSource(url, username, password);
-		}
-	*/
+	/*
+	 * public DataSource dataSource() { String url =
+	 * "jdbc:mysql://127.0.0.1:3306/employee"; String username = "root"; String
+	 * password = "madh"; return new DriverManagerDataSource(url, username,
+	 * password); }
+	 */
 }

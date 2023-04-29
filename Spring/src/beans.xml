@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/beans/spring-jdbc.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:component-scan base-package="com.madhav"></context:component-scan>
+	<!-- <context:component-scan base-package="com.madhav"></context:component-scan>  -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="url" value="jdbc:mysql://localhost:3306/school?useSSL=false"/>
 		<property name="username" value="root"/>
@@ -19,10 +19,12 @@
 		<constructor-arg ref="dataSource"/>
 	</bean>
 	
-	<!--  <bean id="Studentdao" class="com.madhav.dao.StudentDAOImpl">
+	<bean id="Studentdao" class="com.madhav.dao.StudentDAOImpl">
 		<property name="jt" ref="jtObj"/>
-	</bean> -->
+	</bean>
 	
-	
+	<bean id="DAOHelper" class="com.madhav.service.StudentDAOHelper">
+		<property name="sDAO" ref="Studentdao"/>
+	</bean>
 </beans>
        

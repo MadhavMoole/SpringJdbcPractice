@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.madhav.api.Student;
 import com.madhav.dao.StudentDAO;
 import com.madhav.dao.StudentDAOImpl;
+import com.madhav.service.StudentDAOHelper;
 
 public class Test {
 	private static ApplicationContext ctx;
@@ -34,13 +35,17 @@ public class Test {
 			System.err.println("Error!");
 		}
 		*/
-		ss.insert(t);
+		//ss.insert(t);
+		/*
 		if(ss.deleteRecordByStudentNameOrStudentAddress(null, "Goregaon") == 1) {
 			System.out.println("DONE!");
 		} else {
 			System.out.println("YOU SUCK!");
 		}
-		
+		*/
+		ss.cleanup();
+		StudentDAOHelper sh = (StudentDAOHelper) ctx.getBean("DAOHelper");
+		sh.setupStudentTable();
 	}
 
 }
