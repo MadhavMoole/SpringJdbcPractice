@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.employee.api.Employee;
+import com.employee.rowMapper.*;
 
 @Repository("EmployeeDAO")
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -74,6 +75,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		String sql = "INSERT INTO EMPLOYEE VALUES (?, ?, ?)";
 		jt.batchUpdate(sql, eList);
 		System.out.println("Inserted Batch SuccessFully");
+	}
+
+	@Override
+	public List<Employee> ReadAllEmployee() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM EMPLOYEE";
+
+		// This will call the rowMap function in the employeeRowMapper class as long as
+		// values exist in the database
+		List<Employee> eList = jt.query(sql, new employeeRowMapper());
+		return eList;
 	}
 
 	// This is a very stupid way of creating DataSource implementation, as you are
