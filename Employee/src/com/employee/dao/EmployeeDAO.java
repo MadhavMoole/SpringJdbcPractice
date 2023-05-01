@@ -19,4 +19,6 @@ public interface EmployeeDAO {
 	// records are going to be returned , since Lists are dynamic in size we will
 	// use them over normal arrays.
 	List<Employee> ReadAllEmployee();
+	
+	Employee returnEmployeeByID(int e_ID);
 }

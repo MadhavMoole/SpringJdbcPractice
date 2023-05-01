@@ -1,15 +1,11 @@
 package com.employee.dao;
 
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 //import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 //import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
-
 import com.employee.api.Employee;
 import com.employee.rowMapper.*;
 
@@ -86,6 +82,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		// values exist in the database
 		List<Employee> eList = jt.query(sql, new employeeRowMapper());
 		return eList;
+	}
+
+	@Override
+	public Employee returnEmployeeByID(int e_ID) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM EMPLOYEE WHERE e_ID = ?";
+		Employee obj = jt.queryForObject(sql, new employeeRowMapper(), e_ID);
+		
+		/* We can also use the BeanPropertyRowMapper class to do the same...
+		 * 
+		 * Employee TestObj = jt.queryForObject(sql, new BeanPropertyRowMapper<Employee>(Employee.class), e_ID);
+		 * return TestObj;
+		 * 
+		 * */
+		return obj;
 	}
 
 	// This is a very stupid way of creating DataSource implementation, as you are
