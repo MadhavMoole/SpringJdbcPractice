@@ -11,4 +11,5 @@ public interface StudentDAO {
 	int deleteRecordByStudentNameOrStudentAddress(String name, String address);
 	void cleanup();
 	List<Student> findAllStudents();
+	Student findStudentByRollNo(int rollNo);
 }

@@ -24,10 +24,10 @@ public class Test {
 		
 		StudentDAOImpl student = ctx.getBean("Studentdao", StudentDAOImpl.class);
 		List<Student> sList = student.findAllStudents();
+		System.out.println(student.findStudentByRollNo(2));
 		
 		StudentDAOHelper help = ctx.getBean("DAOHelper", StudentDAOHelper.class);
 		help.printStudent(sList);
-		
 	}
 
 }
