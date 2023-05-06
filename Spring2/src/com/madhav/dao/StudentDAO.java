@@ -1,6 +1,7 @@
 package com.madhav.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.madhav.api.Student;
 
@@ -12,4 +13,6 @@ public interface StudentDAO {
 	void cleanup();
 	List<Student> findAllStudents();
 	Student findStudentByRollNo(int rollNo);
+	List<Student> findStudentByName(String name);
+	Map<String , List<String>> listStudentsByAddress();
 }

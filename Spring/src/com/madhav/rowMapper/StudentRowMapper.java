@@ -12,13 +12,12 @@ public class StudentRowMapper implements RowMapper<Student> {
 	@Override
 	public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
-		Student newStudent = new Student();
-
-		newStudent.setRollno(rs.getInt("ROLL_NO"));
-		newStudent.setName(rs.getString("STUDENT_NAME"));
-		newStudent.setAddress(rs.getString("STUDENT_ADDR"));
-		System.out.println("Inside the map row method");
-		return newStudent;
+		
+		Student s = new Student();
+		s.setRollno(rs.getInt(1));
+		s.setName(rs.getString(2));
+		s.setAddress(rs.getString(3));
+		return s;
 	}
 
 }

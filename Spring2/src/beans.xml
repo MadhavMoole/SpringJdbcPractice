@@ -8,6 +8,7 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- <context:component-scan base-package="com.madhav"></context:component-scan>  -->
+	<!-- <context:component-scan base-package="com.madhav.api"></context:component-scan>  -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="url" value="jdbc:mysql://localhost:3306/school?useSSL=false"/>
 		<property name="username" value="root"/>
@@ -26,5 +27,9 @@
 	<bean id="DAOHelper" class="com.madhav.service.StudentDAOHelper">
 		<property name="sDAO" ref="Studentdao"/>
 	</bean>
+	
+	<!-- <bean id="CodingChallenge" class="com.madhav.api.SpringCodingChallenge">
+		<property name="jt" ref="jtObj"/>  
+	</bean> -->
 </beans>
        

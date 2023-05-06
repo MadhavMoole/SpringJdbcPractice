@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import com.madhav.resultSetExtractor.*;
 
 import com.madhav.api.Student;
 import com.madhav.rowMapper.*;
@@ -89,4 +90,21 @@ public class StudentDAOImpl implements StudentDAO {
 		return st;
 	}
 
+	@Override
+	public List<Student> findStudentByName(String name) {
+		// TODO Auto-generated method stub
+		String sql  = "SELECT * FROM STUDENT WHERE STUDENT_NAME = ?";
+		List<Student> sList =  jt.query(sql, new StudentResultSetExtractor(), name);
+		return sList;
+	}
+
+	@Override
+	public Map<String, List<String>> listStudentsByAddress() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM school.student";
+		HashMap<String, List<String>> uwu =  jt.query(sql, new StudentAddressExtractor());
+		return uwu;
+	}
+	
+	
 }
